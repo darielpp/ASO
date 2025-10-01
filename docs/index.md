@@ -1,19 +1,10 @@
----
-layout: default
-title: "Curso de Machine Learning"
----
+# Administración de Sistemas Operativos
 
-Este repositorio contiene el material del curso de Machine Learning desarrollado por Mireia Consarnau.
+¡Bienvenido/a a mi página de Administración de Sistemas Operativos!  
+Aquí encontrarás proyectos, recursos y documentación relacionados con la gestión y administración de sistemas operativos, tanto Linux como Windows. Este espacio está pensado para compartir conocimientos, experiencias y avances en los diferentes proyectos desarrollados en el ámbito de los sistemas operativos.  
+Explora los contenidos, participa y aprovecha al máximo este repositorio de aprendizaje colaborativo.
 
-- Índice y enlaces a las unidades del curso.
-- Recursos en formato PDF, vídeos, y Google Colab.
-- Código y ejemplos prácticos.
-
-## Licencia
-
-El contenido está bajo licencia [Creative Commons BY-NC-SA 3.0 ES](LICENSE.md).
-
-## Contenido del curso
-
-### [Unidad 1. Fundamentos de la Inteligencia Artificial y el Aprendizaje Automático](unidad1/unidad1.md)  
+<div>
+    <img src="./fondo.png" alt="Sistemas Operativos" width="300">
+</div>
 
