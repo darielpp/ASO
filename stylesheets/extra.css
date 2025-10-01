@@ -1,0 +1,20 @@
+/* Aumenta el ancho máximo del contenido */
+.wy-nav-content {
+    max-width: 1700px; /* Puedes ajustar este valor */
+}
+
+
+/* Alinear imágenes al centro */
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1.5px solid white; /* Borde blanco de 2px */
+    padding: 1px; /* Espacio entre la imagen y el borde */
+    max-width: 300px; /* Tamaño máximo de la imagen */
+    width: 100%; /* Asegura que se ajuste al contenedor */
+}
+
+#footer {
+    display: inline;
+}
