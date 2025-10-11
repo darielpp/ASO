@@ -8,8 +8,8 @@ extra_css:
 
 nav:
   - Home: index.md
-  - unidad 1: 
-       - Lorem Ipsum: unidad1/unidad1.md
+  - RA 1: 
+       - Creació entorn d’arrencada amb systemd L: Creació entorn d’arrencada amb systemd L/CreacioEntornsArrancada.md
        
 theme:
   name: "readthedocs"
