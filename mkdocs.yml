@@ -9,7 +9,8 @@ extra_css:
 nav:
   - Home: index.md
   - RA 1: 
-       - Creació entorn d’arrencada amb systemd L: Creació entorn d’arrencada amb systemd L/CreacioEntornsArrancada.md
+       - Creació entorn d’arrencada Linux: Creació entorn d’arrencada/CreacioEntornsArrancadaLinux.md
+       - Creació entorn d’arrencada Windows: Creació entorn d’arrencada/CreacioEntornsArrancadaWin.md
        
 theme:
   name: "readthedocs"

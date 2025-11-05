@@ -1,7 +1,7 @@
 # __Creació d'entorns d'arrancada__
 Esta práctica trata sobre la creación de servicios (`.service`) y targets (`.target`) en Ubuntu, conceptos fundamentales en la administración de sistemas y ciberseguridad.
 
-![archivos](./img/CreacioEntornsArrancada/CreacioEntornsArrancada1.png)
+![archivos](./img/CreacioEntornsArrancadaLinux/CreacioEntornsArrancada1.png)
 
 - Un archivo **`.service`** define un servicio gestionado por *systemd*, como ejecutar automáticamente un script al iniciar el equipo. Por ejemplo, se puede usar para levantar una reverse shell en un entorno de pruebas de ciberseguridad.
 - Un archivo **`.target`** agrupa varios servicios y otros targets, permitiendo organizar y controlar el arranque de múltiples componentes relacionados.
@@ -14,7 +14,7 @@ En resumen: los `.service` definen tareas concretas, los `.target` agrupan servi
 ## __.service__
 El siguiente es un ejemplo de archivo `.service`:
 
-![service](./img/CreacioEntornsArrancada/CreacioEntornsArrancada2.png)
+![service](./img/CreacioEntornsArrancadaLinux/CreacioEntornsArrancada2.png)
 
 
 **Explicación línea por línea:**
@@ -37,7 +37,7 @@ El siguiente es un ejemplo de archivo `.service`:
 ## __.target__
 El siguiente es un ejemplo de archivo `.target`:
 
-![target](./img/CreacioEntornsArrancada/CreacioEntornsArrancada3.png)
+![target](./img/CreacioEntornsArrancadaLinux/CreacioEntornsArrancada3.png)
 
 **Explicación línea por línea:**
 
@@ -55,7 +55,7 @@ El siguiente es un ejemplo de archivo `.target`:
 
 Cuando se instala un servicio con la opción `WantedBy` en su archivo `.service`, *systemd* crea automáticamente un directorio llamado `.target.wants` para el target especificado. Dentro de este directorio, se añaden enlaces simbólicos a los servicios que deben iniciarse junto con ese target. Esto permite que, al activar el target, se ejecuten todos los servicios asociados de forma automática y ordenada, facilitando la gestión de dependencias y el arranque de componentes relacionados.
 
-![wants](./img/CreacioEntornsArrancada/CreacioEntornsArrancada4.png)
+![wants](./img/CreacioEntornsArrancadaLinux/CreacioEntornsArrancada4.png)
 
 Se generará automáticamente más adelante, no hace falta crearlo.
 
@@ -64,11 +64,11 @@ Se generará automáticamente más adelante, no hace falta crearlo.
 ## __.script__
 El siguiente es un ejemplo de archivo `.sh`:
 
-![script](./img/CreacioEntornsArrancada/CreacioEntornsArrancada5.png)
+![script](./img/CreacioEntornsArrancadaLinux/CreacioEntornsArrancada5.png)
 
 Voy a realizar una prueba ejecutando el script manualmente para comprobar si puedo conectarme correctamente al equipo remoto. Esto me permitirá verificar que la configuración y el funcionamiento del script son correctos antes de automatizar el proceso con systemd.
 
-![script](./img/CreacioEntornsArrancada/CreacioEntornsArrancada7.png)
+![script](./img/CreacioEntornsArrancadaLinux/CreacioEntornsArrancada7.png)
 
 
 
@@ -108,11 +108,11 @@ Esto crea los enlaces simbólicos en los directorios `.wants` correspondientes.
 
 Con estos pasos, el servicio y el target estarán configurados para arrancar automáticamente cada vez que se inicie el sistema.
 
-![script](./img/CreacioEntornsArrancada/CreacioEntornsArrancada6.png)
+![script](./img/CreacioEntornsArrancadaLinux/CreacioEntornsArrancada6.png)
 
 
 ## __Demostración en vídeo__
 
 A continuación se muestra un vídeo donde se reinicia la máquina virtual y se verifica que la conexión al equipo remoto se establece automáticamente, gracias a la configuración realizada con systemd. Este proceso ocurre de manera transparente para el usuario de la máquina víctima, demostrando cómo los servicios y targets permiten automatizar tareas en el arranque del sistema sin intervención manual.
 
-<video controls src="../vids/CreacioEntornsArrancada.mp4" title="Demostración"></video>
+<video controls src="../../vids/CreacioEntornsArrancada.mp4" title="Demostración"></video>
