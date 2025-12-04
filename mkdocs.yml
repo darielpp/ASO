@@ -11,7 +11,9 @@ nav:
   - RA 1: 
        - Creació entorn d’arrencada Linux: Creació entorn d’arrencada/CreacioEntornsArrancadaLinux.md
        - Creació entorn d’arrencada Windows: Creació entorn d’arrencada/CreacioEntornsArrancadaWin.md
-       
+  - RA 2:
+       - Gestión de Kernels: kernel/kernel_linux.md
+     
 theme:
   name: "readthedocs"
   language: es

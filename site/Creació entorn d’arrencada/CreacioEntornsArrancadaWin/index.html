@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Dariel Piñón" /><link rel="canonical" href="https://daarieel.github.io/ASO/Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaWin/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Creació entorn d’arrencada Windows - Dariel Piñón ASO</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Creaci\u00f3 entorn d\u2019arrencada Windows";
+        var mkdocs_page_input_path = "Creaci\u00f3 entorn d\u2019arrencada/CreacioEntornsArrancadaWin.md";
+        var mkdocs_page_url = "/ASO/Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaWin/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Dariel Piñón ASO
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RA 1</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../CreacioEntornsArrancadaLinux/">Creació entorn d’arrencada Linux</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Creació entorn d’arrencada Windows</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#instalacion-del-servicio-con-nssm">Instalación del servicio con NSSM</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuracion-del-servicio-en-windows">Configuración del servicio en Windows</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#inicio-del-servicio-y-verificacion">Inicio del servicio y verificación</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#script-asociado-pt2ps1">Script asociado (pt2.ps1)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#pasos-finales-para-automatizar-el-arranque">Pasos finales para automatizar el arranque</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Dariel Piñón ASO</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">RA 1</li>
+      <li class="breadcrumb-item active">Creació entorn d’arrencada Windows</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="creacion-de-un-servicio-en-windows">Creación de un servicio en Windows</h1>
+<p>En esta práctica explico cómo creé un servicio en Windows que ejecuta automáticamente un script de PowerShell usando NSSM (Non-Sucking Service Manager). Usé NSSM para instalar un script como servicio y configurar el ejecutable, los argumentos, el directorio de inicio y la cuenta de ejecución.</p>
+<p><img alt="NSSM - interfaz inicial" src="../img/CreacioEntornsArrancadaWin/CreacionServicioWindows1.png" /></p>
+<p>Resumen:
+- Un servicio es un proceso en segundo plano que puede iniciarse automáticamente al arrancar el sistema.
+- NSSM me permite convertir scripts/aplicaciones en servicios gestionados por el sistema con opciones avanzadas de configuración.</p>
+<hr />
+<h2 id="instalacion-del-servicio-con-nssm">Instalación del servicio con NSSM</h2>
+<p>Ejecuto NSSM desde PowerShell para instalar el servicio:</p>
+<pre><code class="language-powershell">C:\Users\dariel\Desktop\nssm-2.24\nssm-2.24\win64\nssm.exe install pt2Servicio
+</code></pre>
+<p>Se me abrirá la interfaz gráfica de NSSM. Configuro los campos principales:</p>
+<p><img alt="Configurar NSSM" src="../img/CreacioEntornsArrancadaWin/CreacionServicioWindows2.png" /></p>
+<p>Campos y valores que utilicé:</p>
+<ul>
+<li>Path:
+    <code>system32\WindowsPowerShell\v1.0\powershell.exe</code>
+    Indica que el servicio ejecutará PowerShell.</li>
+<li>Startup directory:
+    <code>C:\Users\dariel\Desktop\Servicios</code>
+    Carpeta donde está el script.</li>
+<li>Arguments:
+    <code>-ExecutionPolicy Bypass -File "C:\Users\dariel\Desktop\Servicios\pt2.ps1"</code>
+    Permite ejecutar pt2.ps1 saltando la política de ejecución.</li>
+<li>Service name:
+    <code>pt2Servicio</code>
+    Nombre del servicio que creé.</li>
+</ul>
+<p>Al pulsar "Install service", obtengo la confirmación de instalación:</p>
+<p><img alt="Instalación confirmada" src="../img/CreacioEntornsArrancadaWin/CreacionServicioWindows3.png" /></p>
+<hr />
+<h2 id="configuracion-del-servicio-en-windows">Configuración del servicio en Windows</h2>
+<p>Puedo ver el servicio en la lista de servicios del sistema:</p>
+<p><img alt="Lista de servicios" src="../img/CreacioEntornsArrancadaWin/CreacionServicioWindows4.png" /></p>
+<p>Desde la consola de servicios puedo:
+- Iniciar, detener o reiniciar el servicio.
+- Configurar tipo de inicio: Automático, Manual o Deshabilitado.
+- Ajustar propiedades como la cuenta bajo la cual se ejecuta.</p>
+<p>En la pestaña "Iniciar sesión" selecciono una cuenta con los privilegios necesarios:</p>
+<p><img alt="Seleccionar cuenta" src="../img/CreacioEntornsArrancadaWin/CreacionServicioWindows5.png" /></p>
+<hr />
+<h2 id="inicio-del-servicio-y-verificacion">Inicio del servicio y verificación</h2>
+<p>Inicio el servicio desde PowerShell:</p>
+<pre><code class="language-powershell">net start pt2Servicio
+</code></pre>
+<p><img alt="Servicio iniciado" src="../img/CreacioEntornsArrancadaWin/CreacionServicioWindows6.png" /></p>
+<p>En la consola de servicios veo el servicio en estado "En ejecución":</p>
+<hr />
+<h2 id="script-asociado-pt2ps1">Script asociado (pt2.ps1)</h2>
+<p>A continuación el script real utilizado y una breve explicación.</p>
+<pre><code class="language-powershell"># Mostrar notificación personalizada
+Add-Type -AssemblyName System.Windows.Forms
+[System.Windows.Forms.MessageBox]::Show(&quot;¡Bienvenido! El sistema se ha iniciado correctamente.&quot;, &quot;Servicio Activo&quot;)
+
+# Ruta del log
+$logPath = &quot;C:\Users\dariel\Desktop\Servicios\pt2.log&quot;
+
+# Recopilar información del sistema
+$usuario = $env:USERNAME
+$equipo = $env:COMPUTERNAME
+$ip = (Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias &quot;Ethernet&quot; | Where-Object {$_.IPAddress -ne &quot;127.0.0.1&quot;}).IPAddress
+$ram = [math]::Round((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1GB, 2)
+$inicio = (Get-CimInstance Win32_OperatingSystem).LastBootUpTime
+
+# Guardar información inicial
+Add-Content -Path $logPath -Value &quot;`n--- Inicio de sesión ---&quot;
+Add-Content -Path $logPath -Value &quot;Usuario: $usuario&quot;
+Add-Content -Path $logPath -Value &quot;Equipo: $equipo&quot;
+Add-Content -Path $logPath -Value &quot;IP: $ip&quot;
+Add-Content -Path $logPath -Value &quot;RAM: $ram GB&quot;
+Add-Content -Path $logPath -Value &quot;Inicio del sistema: $inicio&quot;
+Add-Content -Path $logPath -Value &quot;-------------------------`n&quot;
+
+# Monitorizar procesos abiertos por el usuario
+$procesosPrevios = @()
+
+while ($true) {
+    $procesosActuales = Get-Process | Select-Object -ExpandProperty ProcessName
+    $nuevos = $procesosActuales | Where-Object { $_ -notin $procesosPrevios }
+
+    foreach ($proceso in $nuevos) {
+        $hora = Get-Date -Format &quot;HH:mm:ss&quot;
+        Add-Content -Path $logPath -Value &quot;$hora - Aplicación iniciada: $proceso&quot;
+    }
+
+    $procesosPrevios = $procesosActuales
+    Start-Sleep -Seconds 5
+}
+</code></pre>
+<p><strong>Explicación:</strong></p>
+<ul>
+<li>Muestra una notificación inicial mediante System.Windows.Forms.</li>
+<li>Registra en un fichero de log información del sistema (usuario, equipo, IP, RAM y hora de arranque).</li>
+<li>Monitoriza procesos y añade al log las aplicaciones que aparecen nuevas, comprobando cada 5 segundos.</li>
+<li>Nota: al ejecutarlo como servicio hay que asegurar permisos y rutas; la notificación gráfica puede no mostrarse si el servicio no interactúa con el escritorio (sesión 0).</li>
+</ul>
+<hr />
+<h2 id="pasos-finales-para-automatizar-el-arranque">Pasos finales para automatizar el arranque</h2>
+<ul>
+<li>Configuro el servicio con inicio automático.</li>
+<li>Reinicio el sistema y verifico que el servicio se inicia correctamente.</li>
+<li>Compruebo permisos y dependencias (cuenta de servicio, rutas accesibles, variables de entorno) para evitar errores durante el arranque.</li>
+</ul>
+<hr />
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../CreacioEntornsArrancadaLinux/" class="btn btn-neutral float-left" title="Creació entorn d’arrencada Linux"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://daarieel.github.io/ASO">MkDocs ASO</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/darielpp">Dariel Piñón</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-flex;"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../CreacioEntornsArrancadaLinux/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
