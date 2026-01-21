@@ -2,27 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://daarieel.github.io/ASO/</loc>
-         <lastmod>2025-12-04</lastmod>
+         <lastmod>2026-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://daarieel.github.io/ASO/LICENSE/</loc>
-         <lastmod>2025-12-04</lastmod>
+         <lastmod>2026-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://daarieel.github.io/ASO/Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaLinux/</loc>
-         <lastmod>2025-12-04</lastmod>
+         <lastmod>2026-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://daarieel.github.io/ASO/Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaWin/</loc>
-         <lastmod>2025-12-04</lastmod>
+         <lastmod>2026-01-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://daarieel.github.io/ASO/VPN/vpn/</loc>
+         <lastmod>2026-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://daarieel.github.io/ASO/kernel/kernel_linux/</loc>
-         <lastmod>2025-12-04</lastmod>
+         <lastmod>2026-01-21</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
