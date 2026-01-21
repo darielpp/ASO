@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Dariel Piñón" /><link rel="canonical" href="https://daarieel.github.io/ASO/kernel/kernel_linux/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Gestión de Kernels - Dariel Piñón ASO</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Gesti\u00f3n de Kernels";
+        var mkdocs_page_input_path = "kernel/kernel_linux.md";
+        var mkdocs_page_url = "/ASO/kernel/kernel_linux/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> Dariel Piñón ASO
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RA 1</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaLinux/">Creació entorn d’arrencada Linux</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaWin/">Creació entorn d’arrencada Windows</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">RA 2</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="./">Gestión de Kernels</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#configuracion-y-parches">Configuración y parches</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">Dariel Piñón ASO</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">RA 2</li>
+      <li class="breadcrumb-item active">Gestión de Kernels</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="gestion-de-kernels"><strong>Gestión de Kernels</strong></h1>
+<h2 id="configuracion-y-parches"><strong>Configuración y parches</strong></h2>
+<p>En esta primera captura se puede ver el proceso para preparar la modificación del kernel. Acceder al directorio init dentro del código fuente de Linux, donde se encuentran los archivos que controlan la inicialización del sistema. Crear una copia del archivo main.c con el nombre main.c.personalizado para trabajar sobre él sin alterar el original. Abrir el archivo copiado con el editor nano para realizar las modificaciones.</p>
+<p><img alt="kernel" src="../img/kernel1.png" /></p>
+<hr />
+<p>En la segunda captura se puede ver el contenido editado. Añadir dos mensajes mediante la función pr_notice() para que se muestren en el log del sistema durante el arranque: uno indicando “El sistema está listo, yo no tanto” y otro con el nombre “Dariel”. Personalizar el kernel y recompilarlo para aplicar los cambios.</p>
+<p><img alt="kernel" src="../img/kernel2.png" /></p>
+<hr />
+<p>En esta parte se puede observar cómo generar el parche que contiene las diferencias entre el archivo original y el modificado. Ejecutar el comando diff -u main.c main.c.personalizado &gt; parche1.patch para crear un fichero que almacene los cambios realizados. Este archivo permitirá aplicar la modificación sin necesidad de reemplazar todo el código fuente.
+Después, comprobar el contenido del directorio para confirmar que el parche se ha creado correctamente junto a los demás archivos. Este paso es clave para distribuir la personalización de forma ordenada y reutilizable.</p>
+<p><img alt="kernel" src="../img/kernel3.png" /></p>
+<hr />
+<p>Se intenta aplicar el parche creado anteriormente usando el comando patch -p1 &lt; parche1.patch. El sistema indica que no encuentra el archivo a parchear debido a la ruta, lo que sugiere que se debe ajustar la opción -p o la ubicación del fichero. Finalmente, se confirma que el contenido del archivo main.c incluye la línea personalizada mediante el comando grep Dariel main.c.</p>
+<p><img alt="kernel" src="../img/kernel4.png" /></p>
+<hr />
+<p>Se procede a editar el archivo de configuración de GRUB ubicado en /etc/default/grub utilizando el editor nano. Este paso es necesario para ajustar parámetros relacionados con el arranque del sistema antes de compilar y probar el kernel modificado. Lo único que se realiza es comentar las líneas resaltadas.</p>
+<p><img alt="kernel" src="../img/kernel5.png" /></p>
+<p><img alt="kernel" src="../img/kernel6.png" /></p>
+<hr />
+<p>se ejecuta el comando update-grub para aplicar los cambios realizados en la configuración. El sistema genera el archivo de configuración actualizado y detecta las imágenes del kernel disponibles en /boot, incluyendo la versión que se ha personalizado. Este paso asegura que el gestor de arranque reconozca el nuevo kernel antes de reiniciar.</p>
+<p><img alt="kernel" src="../img/kernel7.png" /></p>
+<hr />
+<p>En este paso se ejecuta el comando make menuconfig para abrir la interfaz de configuración del kernel. Este comando permite personalizar las opciones de compilación mediante un menú interactivo, donde se pueden habilitar o deshabilitar características específicas del kernel antes de proceder a la compilación.</p>
+<p><img alt="kernel" src="../img/kernel8.png" /></p>
+<hr />
+<p>Una vez abierto el menú de configuración del kernel con make menuconfig, acceder al apartado File systems para revisar las opciones relacionadas con los sistemas de archivos. Dentro de este submenú, localizar la opción JFS debugging, que inicialmente aparece deshabilitada, y proceder a activarla. Este cambio permite compilar el kernel con soporte de depuración para el sistema de archivos JFS, lo que resulta útil para diagnosticar problemas y analizar su comportamiento en entornos donde se utilice este tipo de sistema.</p>
+<p><img alt="kernel" src="../img/kernel9.png" /></p>
+<p><img alt="kernel" src="../img/kernel10.png" /></p>
+<p><img alt="kernel" src="../img/kernel11.png" /></p>
+<hr />
+<p>Después de realizar los cambios en la configuración del kernel, guardar la configuración en el archivo .config cuando el sistema lo solicita, confirmando el nombre por defecto. A continuación, verificar que el archivo se ha creado correctamente utilizando el comando ls -la | grep .config, donde se muestra el fichero .config junto a otros archivos relacionados con la configuración del kernel. Este paso asegura que las opciones seleccionadas en el menú se han guardado y están listas para la compilación.</p>
+<p><img alt="kernel" src="../img/kernel12.png" /></p>
+<p><img alt="kernel" src="../img/kernel13.png" /></p>
+<hr />
+<p>Después de guardar la configuración, preparar el entorno para la compilación ejecutando el comando make prepare, lo que sincroniza y genera los archivos necesarios para iniciar el proceso. A continuación, comenzar la construcción del paquete del kernel utilizando make-kpkg --initrd kernel_image kernel_headers, que crea la imagen del kernel y los encabezados, además de generar los scripts y directorios requeridos para empaquetar el kernel en formato compatible con Debian. Este paso es esencial para poder instalar el kernel personalizado en el sistema.</p>
+<p><img alt="kernel" src="../img/kernel14.png" /></p>
+<p><img alt="kernel" src="../img/kernel15.png" /></p>
+<hr />
+<p>Después de completar la compilación y empaquetado del kernel, comprobar el contenido del directorio para confirmar la generación de los archivos .deb. En la imagen se observa la presencia de linux-headers y linux-image, ambos con la versión personalizada y preparados para su instalación en el sistema. Estos paquetes son esenciales: los headers permiten compilar módulos adicionales y la imagen contiene el kernel listo para ser usado.</p>
+<p><img alt="kernel" src="../img/kernel16.png" /></p>
+<hr />
+<p>Finalmente, instalar el kernel personalizado utilizando el comando dpkg -i linux-image-6.8.1_6.8.1-10.00.Custom_amd64.deb. Durante el proceso, el sistema desempaqueta el archivo y ejecuta los scripts necesarios en /etc/kernel/preinst.d, preparando la imagen del kernel para su uso. Este paso confirma que la instalación se realiza correctamente y que el nuevo kernel queda registrado en el sistema, listo para ser utilizado en el próximo arranque.</p>
+<p><img alt="kernel" src="../img/kernel17.png" /></p>
+<p><img alt="kernel" src="../img/kernel18.png" /></p>
+<hr />
+<p>Tras reiniciar el sistema, comprobar en el menú de GRUB que aparece la nueva entrada correspondiente al kernel personalizado, en este caso la versión 6.8.1, lo que indica que la instalación se realizó correctamente. Una vez iniciado el sistema con este kernel, verificar la versión activa mediante el comando uname -r y confirmar que la opción habilitada en la configuración, JFS debugging, está presente utilizando grep JFS_DEBUG /boot/config-$(uname -r), donde se muestra el valor CONFIG_JFS_DEBUG=y. Este resultado confirma que los cambios aplicados durante la compilación se han integrado en el kernel en ejecución.</p>
+<p><img alt="kernel" src="../img/kernel19.png" /></p>
+<p><img alt="kernel" src="../img/kernel20.png" /></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaWin/" class="btn btn-neutral float-left" title="Creació entorn d’arrencada Windows"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://daarieel.github.io/ASO">MkDocs ASO</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/darielpp">Dariel Piñón</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-flex;"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../Creaci%C3%B3%20entorn%20d%E2%80%99arrencada/CreacioEntornsArrancadaWin/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

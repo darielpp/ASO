@@ -13,6 +13,7 @@ nav:
        - Creació entorn d’arrencada Windows: Creació entorn d’arrencada/CreacioEntornsArrancadaWin.md
   - RA 2:
        - Gestión de Kernels: kernel/kernel_linux.md
+       - VPN: VPN/vpn.md
      
 theme:
   name: "readthedocs"
